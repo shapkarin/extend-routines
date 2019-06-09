@@ -1,0 +1,12 @@
+{
+  "env": {
+    "development": {
+      "plugins": ["@babel/plugin-transform-runtime"],
+      "presets": ["@babel/env"]
+    },
+    "es": {
+      "plugins": ["@babel/plugin-transform-runtime"],
+      "presets": [["@babel/env", { "loose": true, "modules": false }]]
+    }
+  }
+}
