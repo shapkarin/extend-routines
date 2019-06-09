@@ -1,0 +1,6 @@
+.idea
+.DS_Store
+build
+Thumbs.db
+node_modules
+.npm
