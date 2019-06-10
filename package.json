@@ -1,6 +1,6 @@
 {
   "name": "extend-saga-routines",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "extend redux-saga-routines with custom types and actions",
   "main": "build/index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "redux-saga",
     "routines",
     "redux-saga-routines",
-    "extend-saga-routines"
+    "extend-saga-routines",
+    "extend"
   ],
   "author": "Yury Shapkarin <yury@shapkarin.me> (https://shapkarin.me)",
   "license": "MIT",

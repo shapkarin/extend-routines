@@ -110,4 +110,14 @@ describe('extendRoutine', () => {
     expect(routine.someLongType(payload)).to.deep.equal(someAction);
   });
 
+  it('should create extened routine with long prefix', () => {
+
+    const LONG_PREFIX = 'some/long/prefix'
+    const PREFIXED = `${LONG_PREFIX}/SOME_LONG_TYPE`;
+    const routine = extendRoutine(createRoutine(LONG_PREFIX), 'SOME_LONG_TYPE');
+
+    expect(routine.SOME_LONG_TYPE).to.equal(PREFIXED);
+    expect(routine.someLongType.toString()).to.equal(PREFIXED);
+  });
+
 });

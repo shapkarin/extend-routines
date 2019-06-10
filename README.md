@@ -15,7 +15,10 @@ import extendRoutine from 'extend-saga-routines';
 const projects = extendRoutine(createRoutine('projects'), 'TOGGLE_INFO');
 
 console.log(projects.TOGGLE_INFO);
+// projects/TOGGLE_INFO
+
 console.log(projects.toggleInfo({ id: 112 }));
+// {type: "projects/TOGGLE_INFO", payload: { id: 112 }}
 
 // and with array
 const other = extendRoutine(
