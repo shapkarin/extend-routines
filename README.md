@@ -14,21 +14,22 @@ import extendRoutine from 'extend-saga-routines';
 
 const projects = extendRoutine(createRoutine('projects'), 'TOGGLE_INFO');
 
-console.log(projects.TOGGLE_INFO);
-// projects/TOGGLE_INFO
+projects.TOGGLE_INFO === 'projects/TOGGLE_INFO'
 
-console.log(projects.toggleInfo({ id: 112 }));
-// {type: "projects/TOGGLE_INFO", payload: { id: 112 }}
+projects.toggleInfo({ id: 112 }) === { type: "projects/TOGGLE_INFO", payload: { id: 112 } }
 
-// and with array
+// and also with array
 const other = extendRoutine(
   createRoutine('other'),
   ['SOME_OTHER', 'CUSTOM']
 );
 
-console.log(other.SOME_OTHER);
-console.log(other.someOther());
+other.SOME_OTHER === 'other/SOME_OTHER'
+other.someOther() === { type: 'other/SOME_OTHER' }
 
-console.log(other.CUSTOM);
-console.log(other.custom());
+other.CUSTOM === 'other/CUSTOM'
+other.custom('thing') === { type: 'other/SOME_OTHER', payload: 'thing' }
 ```
+
+### Note:
+This package can become deprecated by [this PR](https://github.com/afitiskin/redux-saga-routines/pull/59)
