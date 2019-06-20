@@ -28,8 +28,8 @@ other.SOME_OTHER === 'other/SOME_OTHER'
 other.someOther() === { type: 'other/SOME_OTHER' }
 
 other.CUSTOM === 'other/CUSTOM'
-other.custom('thing') === { type: 'other/SOME_OTHER', payload: 'thing' }
+other.custom('thing') === { type: 'other/CUSTOM', payload: 'thing' }
 ```
 
 ### Note:
-This package can become deprecated by [this PR](https://github.com/afitiskin/redux-saga-routines/pull/59)
+This package [can become deprecated](https://github.com/afitiskin/redux-saga-routines/pull/59)
