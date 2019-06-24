@@ -1,4 +1,7 @@
 ## Extend routine with custom types
+![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
+![npm](https://img.shields.io/npm/dt/extend-saga-routines.svg)
+![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
 ### Install 
