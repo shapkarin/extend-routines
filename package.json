@@ -1,6 +1,6 @@
 {
   "name": "extend-saga-routines",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "extend redux-saga-routines with custom types and actions",
   "main": "build/index.js",
   "scripts": {
