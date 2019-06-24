@@ -50,41 +50,6 @@ describe('extendRoutine', () => {
     expect(extendRoutine).to.be.a('function');
   });
 
-  it('should return the same routine as redux-saga-routines', () => {
-
-    const routine = extendRoutine(createRoutine(PREFIX));
-
-    expect(routine).to.be.a('function');
-    expect(routine.toString()).to.equal(TRIGGER);
-    expect(routine(payload)).to.deep.equal(triggerAction);
-
-    expect(routine.trigger).to.be.a('function');
-    expect(routine.TRIGGER).to.equal(TRIGGER);
-    expect(routine.trigger.toString()).to.equal(TRIGGER);
-    expect(routine.trigger(payload)).to.deep.equal(triggerAction);
-
-    expect(routine.request).to.be.a('function');
-    expect(routine.REQUEST).to.equal(REQUEST);
-    expect(routine.request.toString()).to.equal(REQUEST);
-    expect(routine.request(payload)).to.deep.equal(requestAction);
-
-    expect(routine.success).to.be.a('function');
-    expect(routine.SUCCESS).to.equal(SUCCESS);
-    expect(routine.success.toString()).to.equal(SUCCESS);
-    expect(routine.success(payload)).to.deep.equal(successAction);
-
-    expect(routine.failure).to.be.a('function');
-    expect(routine.FAILURE).to.equal(FAILURE);
-    expect(routine.failure.toString()).to.equal(FAILURE);
-    expect(routine.failure(payload)).to.deep.equal(failureAction);
-
-    expect(routine.fulfill).to.be.a('function');
-    expect(routine.FULFILL).to.equal(FULFILL);
-    expect(routine.fulfill.toString()).to.equal(FULFILL);
-    expect(routine.fulfill(payload)).to.deep.equal(fulfillAction);
-  });
-
-
   it('should create an extened routine', () => {
 
     const routine = extendRoutine(createRoutine(PREFIX), ['SOME_LONG_TYPE', 'OTHER']);
