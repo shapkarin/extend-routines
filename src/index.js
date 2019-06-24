@@ -1,1 +1,1 @@
-export { default } from './extendRoutine';
+export { default } from './createExtendedRoutine';
