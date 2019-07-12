@@ -1,9 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { createRoutine } from 'redux-saga-routines';
 
-import extendRoutine from '../src';
-
+import { createExtendedRoutine } from '../src';
 
 const PREFIX = 'PREFIX';
 const TRIGGER = `${PREFIX}/TRIGGER`;
@@ -45,23 +43,22 @@ const otherAction = {
   payload,
 }
 
-describe('extendRoutine', () => {
+describe('createExtendedRoutine', () => {
   it('should be a function', () => {
-    expect(extendRoutine).to.be.a('function');
+    expect(createExtendedRoutine).to.be.a('function');
   });
 
-  it('should throw an error if routine is not defined', () => {
-    expect(() =>  extendRoutine()).to.throw('`routine` must not be empty');
+  it('should throw an error if typePrefix is not a string', () => {
+    expect(() =>  createExtendedRoutine()).to.throw('`typePrefix` must be a string');
   });
 
   it('should throw an error if stages is not defined', () => {
-    expect(() =>  extendRoutine(createRoutine(PREFIX))).to.throw('`stages` must not be empty');
+    expect(() =>  createExtendedRoutine(PREFIX)).to.throw('`stages` must not be empty');
   });
 
+  it('should create a routine with more than `redux-saga-routines` default stages', () => {
 
-  it('should create an extened routine from other routine', () => {
-
-    const routine = extendRoutine(createRoutine(PREFIX), ['SOME_LONG_TYPE', 'OTHER']);
+    const routine = createExtendedRoutine(PREFIX, ['SOME_LONG_TYPE', 'OTHER']);
 
     expect(routine.trigger).to.be.a('function');
     expect(routine.TRIGGER).to.equal(TRIGGER);
@@ -101,7 +98,7 @@ describe('extendRoutine', () => {
 
   it('should create extened routine if types arg is string', () => {
 
-    const routine = extendRoutine(createRoutine(PREFIX), 'SOME_LONG_TYPE');
+    const routine = createExtendedRoutine(PREFIX, 'SOME_LONG_TYPE');
 
     expect(routine.someLongType).to.be.a('function');
     expect(routine.SOME_LONG_TYPE).to.equal(SOME);
@@ -113,7 +110,7 @@ describe('extendRoutine', () => {
 
     const LONG_PREFIX = 'some/long/prefix'
     const PREFIXED = `${LONG_PREFIX}/SOME_LONG_TYPE`;
-    const routine = extendRoutine(createRoutine(LONG_PREFIX), 'SOME_LONG_TYPE');
+    const routine = createExtendedRoutine(LONG_PREFIX, 'SOME_LONG_TYPE');
 
     expect(routine.SOME_LONG_TYPE).to.equal(PREFIXED);
     expect(routine.someLongType.toString()).to.equal(PREFIXED);
@@ -121,7 +118,7 @@ describe('extendRoutine', () => {
 
   it('should create extened routine with provided payload creators', () => {
 
-    const routine = extendRoutine(createRoutine(PREFIX), ['SOME_LONG_TYPE', 'OTHER'], {
+    const routine = createExtendedRoutine(PREFIX, ['SOME_LONG_TYPE', 'OTHER'], {
       someLongType: (payload) => payload * 7,
       other: (payload) => payload * 8,
     });
@@ -154,7 +151,7 @@ describe('extendRoutine', () => {
   it('should create new routine with provided meta creator', () => {
     const someLongTypeMeta = { test: 'someLongTypeMeta' };
 
-    const routine = extendRoutine(createRoutine(PREFIX), 'SOME_LONG_TYPE', (payload) => payload, {
+    const routine = createExtendedRoutine(PREFIX, 'SOME_LONG_TYPE', (payload) => payload, {
       someLongType: () => someLongTypeMeta,
     });
 

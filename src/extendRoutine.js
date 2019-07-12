@@ -1,42 +1,17 @@
 import { createAction } from 'redux-actions';
+import { createRoutineCreator } from 'redux-saga-routines';
 
-const toCamelCase = string => string.toLowerCase().replace(/[_.\- ]+(\w|$)/g, (_, p1) => p1.toUpperCase());
-const isFunction = value => typeof value === 'function';
-const getCreatorForType = (type, creator) => {
-  if (!creator) {
-    return creator;
-  }
-  if (isFunction(creator[type])) {
-    return creator[type];
-  }
-  if (isFunction(creator[toCamelCase(type)])) {
-    return creator[toCamelCase(type)];
-  }
-  if (isFunction(creator)) {
-    return creator;
-  }
-  return undefined;
-};
+import toArray from './toArray';
 
-export default function extendRoutine(routine, types, payloadCreator, metaCreator){
+export default function extendRoutine(routine, stages, payloadCreator, metaCreator){
   if(routine === undefined){
-    throw new Error('routine is undefined')
+    throw new Error('`routine` must not be empty')
   }
-  if(types === undefined){
-    throw new Error('types is undefined')
+  if(stages === undefined){
+    throw new Error('`stages` must not be empty')
   }
-  const createActionCreator = ({ type, typePrefix }) => createAction(`${typePrefix}/${type}`, getCreatorForType(type, payloadCreator), getCreatorForType(type, metaCreator));
-  const typePrefix = routine.toString().replace(/\/([^\/]+)\/?$/, '')
-  const stages = [].concat(types);
 
-  return stages.reduce(
-    (result, stage) => {
-      const actionCreator = createActionCreator({ type: stage, typePrefix });
-      return Object.assign(result, {
-        [toCamelCase(stage)]: actionCreator,
-        [stage.toUpperCase()]: actionCreator.toString(),
-      })
-    },
-    routine
-  );
+  const allStages = [...routine._STAGES, ...toArray(stages)];
+  
+  return createRoutineCreator(allStages)(routine._PREFIX, payloadCreator, metaCreator);
 }
