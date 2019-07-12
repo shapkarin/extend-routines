@@ -1,39 +1,40 @@
-# Extend routine with custom types
+## Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.
+
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
 ![npm](https://img.shields.io/npm/dt/extend-saga-routines.svg)
 ![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
-## Install 
+### Install 
 
 ```
 npm install --save extend-saga-routines
 ```
 
-note: from `ver 3` it use updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
+note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
 
-## With that pakcage you can
+### With that package you can
 - [extend any routine](#extend-any-routine):
   - `extendRoutine(routine, stages, payloadCreator, metaCreator)`
     - routine: any routine you already have, required
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create route that has more that just `redux-saga-routines` default stages](#create-route-that-has-more-that-just-redux-saga-routines-default-stages):
+- [create routine that has more that just `redux-saga-routines` default stages](#create-routine-that-has-more-that-just-redux-saga-routines-default-stages):
   - `createExtendedRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create route with yours custom stages](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine):
+- [create routine with yours custom stages](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine-):
   - `createCustomRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
 
-## Extend any routine:
+### Extend any routine:
 ```js
 import extendRoutine from 'extend-saga-routines';
 import { createRoutine } from 'redux-saga-routines';
@@ -92,7 +93,7 @@ console.log(overwritedDefault.trigger(42))
 // { type: 'overwrited/default/TRIGGER', payload: 84 }
 ```
 
-## Create route that has more that just `redux-saga-routines` default stages:
+### Create routine that has more that just `redux-saga-routines` default stages:
 
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
@@ -130,7 +131,7 @@ console.log(customPayloadMeta.multipliedPayload(2))
 // { type: "payload/meta/MILTIPLIED_PAYLOAD", payload: 4, meta: { some: "meta" }};
 ```
 
-## If you don't need default routine stages you can use `createCustomRoutine`:
+### If you don't need default routine stages you can use `createCustomRoutine`:
 ```javascript
 import { createCustomRoutine } from 'extend-saga-routines';
 
