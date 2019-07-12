@@ -20,13 +20,13 @@ note: from `ver 3` it use updated `redux-saga-routines` API, so you must have at
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create route that has more that just `redux-saga-routines` default stages](#create-route-that-has-more-that-just-`redux-saga-routines`-default-stages):
+- [create route that has more that just `redux-saga-routines` default stages](#create-route-that-has-more-that-just-redux-saga-routines-default-stages):
   - `createExtendedRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create route with yours custom stages](#if-ypu-don't-need-default-routine-stages-you-can-use-`createCustomRoutine`):
+- [create route with yours custom stages](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine):
   - `createCustomRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
@@ -130,7 +130,7 @@ console.log(customPayloadMeta.multipliedPayload(2))
 // { type: "payload/meta/MILTIPLIED_PAYLOAD", payload: 4, meta: { some: "meta" }};
 ```
 
-## If ypu don't need default routine stages you can use `createCustomRoutine`:
+## If you don't need default routine stages you can use `createCustomRoutine`:
 ```javascript
 import { createCustomRoutine } from 'extend-saga-routines';
 
