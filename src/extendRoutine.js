@@ -5,7 +5,7 @@ export default function extendRoutine(routine, stages, payloadCreator, metaCreat
   if(routine === undefined){
     throw new Error('`routine` must not be empty')
   }
-  if(stages === undefined || stages.length === 0){
+  if(!stages || stages.length === 0){
     throw new Error('`stages` must not be empty')
   }
 
