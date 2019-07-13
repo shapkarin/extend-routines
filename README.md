@@ -100,7 +100,8 @@ import { createExtendedRoutine } from 'extend-saga-routines';
 
 const projects = createExtendedRoutine('projects', 'TOGGLE');
 
-projects.TOGGLE === 'projects/TOGGLE';
+console.log(projects.TOGGLE)
+// 'projects/TOGGLE';
 console.log(other.close({ id: 42 }))
 // { type: "projects/TOGGLE", payload: { id: 42 } }
 ```
@@ -111,11 +112,15 @@ import { createExtendedRoutine } from 'extend-saga-routines';
 
 const other = createExtendedRoutine('other', ['OPEN', 'CLOSE']);
 
-other.OPEN === 'other/OPEN';
-console.log(other.open(42)); // { type: "other/OPEN", payload: 42 }
+console.log(other.OPEN);
+// 'other/OPEN';
+console.log(other.open(42));
+// { type: "other/OPEN", payload: 42 }
 
-other.CLOSE === 'other/CLOSE';
-console.log(other.close(42)) // { type: "other/CLOSE", payload: 42 }
+console.log(other.CLOSE);
+// 'other/CLOSE';
+console.log(other.close(42));
+// { type: "other/CLOSE", payload: 42 }
 ```
 
 And also you can add cusom payload and meta creators:
@@ -137,14 +142,20 @@ import { createCustomRoutine } from 'extend-saga-routines';
 
 const steps = createCustomRoutine('steps', ['NEXT', 'PREVIOUS', 'GO_TO']);
 
-steps.NEXT === 'steps/NEXT';
-console.log(steps.next()); // { type: "steps/NEXT" }
+console.log(steps.NEXT)
+// 'steps/NEXT';
+console.log(steps.next()); 
+// { type: "steps/NEXT" }
 
-steps.PREVIOUS === 'steps/PREVIOUS';
-console.log(steps.previous()); // { type: "steps/PREVIOUS" }
+console.log(steps.PREVIOUS);
+// 'steps/PREVIOUS';
+console.log(steps.previous());
+// { type: "steps/PREVIOUS" }
 
-steps.TO === 'steps/GO_TO';
-console.log(steps.goTo(3)); // { type: "steps/GO_TO", payload: 3 }
+console.log(steps.TO);
+// 'steps/GO_TO';
+console.log(steps.goTo(3));
+// { type: "steps/GO_TO", payload: 3 }
 ```
 
 Also you can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
