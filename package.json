@@ -1,7 +1,7 @@
 {
   "name": "extend-saga-routines",
-  "version": "3.0.5",
-  "description": "Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.",
+  "version": "3.0.6",
+  "description": "Extend any routine with custom stages, create routine that has redux-saga-routines default stages and create routine with only yours custom stages.",
   "main": "build/index.js",
   "scripts": {
     "test": "mocha --compilers js:@babel/register test",

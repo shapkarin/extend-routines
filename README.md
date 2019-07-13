@@ -21,13 +21,13 @@ note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have a
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create routine that has more that just `redux-saga-routines` default stages](#create-routine-that-has-more-that-just-redux-saga-routines-default-stages):
+- [create routine that has `redux-saga-routines` default stages and yours](#create-routine-that-has-more-that-just-redux-saga-routines-default-stages):
   - `createExtendedRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
-- [create routine with yours custom stages](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine-):
+- [create routine with only yours custom stages](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine-):
   - `createCustomRoutine(typePrefix, stages, payloadCreator, metaCreator)`
     - typePrefix: prefix for yours stages, required
     - stages: list or just one stage, can be an array or string, required
@@ -100,8 +100,12 @@ import { createExtendedRoutine } from 'extend-saga-routines';
 
 const projects = createExtendedRoutine('projects', 'TOGGLE');
 
-console.log(projects.TOGGLE)
-// 'projects/TOGGLE';
+console.log(projects.TRIGGER);
+// 'projects/TRIGGER'
+console.log(projects.trigger());
+// { type: "projects/TRIGGER" }
+console.log(projects.TOGGLE);
+// 'projects/TOGGLE'
 console.log(other.close({ id: 42 }))
 // { type: "projects/TOGGLE", payload: { id: 42 } }
 ```

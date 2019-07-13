@@ -1,4 +1,3 @@
-import { createAction } from 'redux-actions';
 import { createRoutineCreator } from 'redux-saga-routines';
 
 export default function extendRoutine(routine, stages, payloadCreator, metaCreator){
