@@ -1,0 +1,8 @@
+node_modules
+test
+src
+.babelrc
+.editorconfig
+.gitignore
+.travis.yml
+webpack.config.js

@@ -4,6 +4,7 @@
 ![npm](https://img.shields.io/npm/dt/extend-saga-routines.svg)
 ![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
+![npm bundle size](https://img.shields.io/bundlephobia/min/extend-saga-routines.svg)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
 ### Install 
