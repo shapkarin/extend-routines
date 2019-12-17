@@ -1,3 +1,6 @@
+### Version 3.0.10
+Update dev dependencies
+
 ### Version 3.0.6
 fix docs typo and remove useless imports
 

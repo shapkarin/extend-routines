@@ -1,7 +1,7 @@
 ## Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
-![npm](https://img.shields.io/npm/dt/extend-saga-routines.svg)
+![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
 ![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
@@ -41,26 +41,26 @@ import { createRoutine } from 'redux-saga-routines';
 
 const projects = extendRoutine(createRoutine('projects'), 'TOGGLE_INFO');
 
-console.log(projects.TOGGLE_INFO);
-// 'projects/TOGGLE_INFO'
-console.log(projects.toggleInfo({ id: 112 }));
-// { type: "projects/TOGGLE_INFO", payload: { id: 112 } }
+console.log(projects._STAGES);
+// ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL", "TOGGLE_INFO"]
+console.log(projects.toggleInfo({ id: 42 }));
+// { type: "projects/TOGGLE_INFO", payload: { id: 42 } }
 
 // and also with array:
-const other = extendRoutine(
-  createRoutine('other'),
+const tab = extendRoutine(
+  createRoutine('tab'),
   ['SOME_OTHER', 'CUSTOM']
 );
 
-console.log(other.SOME_OTHER);
-// 'other/SOME_OTHER'
-console.log(other.someOther());
-// { type: 'other/SOME_OTHER' }
+console.log(tab.OPEN);
+// 'tab/OPEN'
+console.log(tab.open(42));
+// { type: 'tab/OPEN', payload: 42 }
 
-console.log(other.CUSTOM);
-// 'other/CUSTOM'
-console.log(other.custom('info'));
-// { type: 'other/CUSTOM', payload: 'info' }
+console.log(tab.CLOSE);
+// 'tab/CLOSE'
+console.log(tab.close(42));
+// { type: 'tab/CLOSE', payload: 42 }
 
 // with provided payload creators:
 const withCustomPayload = extendRoutine(
@@ -145,6 +145,9 @@ console.log(customPayloadMeta.multipliedPayload(2))
 import { createCustomRoutine } from 'extend-saga-routines';
 
 const steps = createCustomRoutine('steps', ['NEXT', 'PREVIOUS', 'GO_TO']);
+
+console.log(steps._STAGES)
+// ["NEXT", "PREVIOUS", "GO_TO"]
 
 console.log(steps.NEXT)
 // 'steps/NEXT';
