@@ -1,7 +1,7 @@
 ## Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
-![npm](https://img.shields.io/npm/dt/extend-saga-routines.svg)
+![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
 ![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 

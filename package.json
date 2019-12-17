@@ -1,10 +1,10 @@
 {
   "name": "extend-saga-routines",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "Extend any routine with custom stages, create routine that has redux-saga-routines default stages and create routine with only yours custom stages.",
   "main": "build/index.js",
   "scripts": {
-    "test": "mocha --compilers js:@babel/register test",
+    "test": "mocha --require @babel/register test",
     "prebuild": "npm run test",
     "build": "webpack",
     "prepublishOnly": "npm run build"
@@ -32,23 +32,22 @@
     "url": "git+https://github.com/shapkarin/extend-saga-routines.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/register": "^7.4.4",
-    "@babel/runtime": "^7.1.2",
-    "babel-loader": "^8.0.5",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "redux-saga": ">=1.0.2",
-    "redux-saga-routines": "^3.2.0",
-    "sinon": "^5.0.7",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.2"
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
+    "@babel/runtime": "^7.7.6",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "redux-saga": ">=0.15.0",
+    "redux-saga-routines": "^3.2.2",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
     "redux-saga": ">=0.15.0",
-    "redux-saga-routines": ">=3.2.0"
+    "redux-saga-routines": "^3.2.0"
   }
 }
