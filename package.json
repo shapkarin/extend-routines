@@ -1,6 +1,6 @@
 {
   "name": "extend-saga-routines",
-  "version": "3.0.10",
+  "version": "3.1.0",
   "description": "Extend any routine with custom stages, create routine that has redux-saga-routines default stages and create routine with only yours custom stages.",
   "main": "build/index.js",
   "scripts": {
@@ -19,7 +19,9 @@
     "extend",
     "createCustomRoutine",
     "createExtendedRoutine",
-    "extendRoutine"
+    "extendRoutine",
+    "fetch",
+    "socket"
   ],
   "author": {
     "name": "Yury Shapkarin",
@@ -32,19 +34,19 @@
     "url": "git+https://github.com/shapkarin/extend-saga-routines.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/register": "^7.7.4",
-    "@babel/runtime": "^7.7.6",
-    "babel-loader": "^8.0.6",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
-    "mocha": "^6.2.2",
+    "mocha": "^7.1.1",
     "redux-saga": ">=0.15.0",
     "redux-saga-routines": "^3.2.2",
-    "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
     "redux-saga": ">=0.15.0",

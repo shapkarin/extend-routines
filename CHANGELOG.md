@@ -17,3 +17,6 @@ remove `toArray` util
 
 note: from this ver you must have at least `redux-saga-routines 3.2.0` installed.
 
+### Version 3.1.0
+- update dev dependencies
+- add `creteSocketRoutine()`
