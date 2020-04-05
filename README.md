@@ -33,6 +33,10 @@ note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have a
     - stages: list or just one stage, can be an array or string, required
     - payloadCreator: yours custom payloadCreator to use with current stage, optional
     - metaCreator: yours custom payloadCreator to use with current stage, optional
+- [create socket routine that you can extend](#socket-routine)
+  - `createSocketRoutine(typePrefix, stages, payloadCreator, metaCreator)`
+  - default stages are: 'CONNECTED', 'DISCONNECTED', 'MESSAGE_SENDED', 'MESSAGE_RECEIVED'
+  - you can extend them as well by `stages` argument
 
 ### Extend any routine:
 ```js
@@ -166,3 +170,22 @@ console.log(steps.goTo(42));
 ```
 
 Also you can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
+
+### Socket Routine
+```javascript
+import { createSocketRoutine } from 'extend-saga-routines';
+
+const chat = createSocketRoutine('chat', ['WHY', 'NOT']);
+
+console.log(projects._STAGES);
+// ["CONNECTED", "DISCONNECTED", "MESSAGE_SENDED", "MESSAGE_RECEIVED"];
+console.log(chat.WHY);
+// 'chat/WHY';
+console.log(chat.why(42));
+// { type: "chat/WHY", payload: 42 }
+
+console.log(chat.NOT);
+// 'chat/NOT';
+console.log(chat.not(42));
+// { type: "chat/NOT", payload: 42 }
+```
