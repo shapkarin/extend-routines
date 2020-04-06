@@ -5,7 +5,7 @@ export default function createSocketRoutine(typePrefix, stages = [], payloadCrea
     throw new Error('`typePrefix` must be a string');
   };
 
-  const defaultSocketStages = ['CONNECTED', 'DISCONNECTED', 'MESSAGE_SENDED', 'MESSAGE_RECEIVED'];
+  const defaultSocketStages = ['CONNECTED', 'DISCONNECTED', 'SENDED', 'RECEIVED'];
 
   const allStages = defaultSocketStages.concat(stages);
 
