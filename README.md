@@ -183,7 +183,6 @@ console.log(chat.WHY);
 // 'chat/WHY';
 console.log(chat.why(42));
 // { type: "chat/WHY", payload: 42 }
-
 console.log(chat.NOT);
 // 'chat/NOT';
 console.log(chat.not(42));
