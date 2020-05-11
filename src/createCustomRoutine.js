@@ -4,9 +4,11 @@ export default function createCustomRoutine(typePrefix, stages, payloadCreator, 
   if(typeof typePrefix !== 'string'){
     throw new Error('`typePrefix` must be a string');
   };
-  if(!Array.isArray(stages)){
-    throw new Error('createCustomRoutine `stages` must be an array');
+  if(!stages || stages.length === 0){
+    throw new Error('`stages` must not be empty');
   };
 
-  return createRoutineCreator(stages)(typePrefix, payloadCreator, metaCreator);
+  const stagesArray = [].concat(stages);
+
+  return createRoutineCreator(stagesArray)(typePrefix, payloadCreator, metaCreator);
 };
