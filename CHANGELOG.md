@@ -30,3 +30,6 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 - Ability to create a bunch of routines with new method `createRoutines`
 - Allow to pass one stage as a string for `createCustomRoutine`
 - Fix typo in readme
+
+### Version 3.2.1
+- Update webpack
