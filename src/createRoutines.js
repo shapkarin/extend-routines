@@ -35,7 +35,9 @@ export default function createRoutines(scheme){
           ],
           payloadAndMeta
         );
-      };
+      } else if(!nameSpace.startsWith('_')){
+        
+      }
 
       switch(method) {
         case 'custom':
@@ -54,5 +56,5 @@ export default function createRoutines(scheme){
   }
 
   iterate(scheme);
-  return scheme;
+  return result;
 };
