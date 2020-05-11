@@ -12,7 +12,6 @@ export default function createRoutines(scheme){
       if(nameSpace.startsWith('_')) {
         continue;
       }
-      let allStages = [];
       let payloadAndMeta = [];
       let customStages = [];
       let method = '';
@@ -36,19 +35,16 @@ export default function createRoutines(scheme){
           payloadAndMeta
         );
       } 
-      // else if(!nameSpace.startsWith('_')){
-        
-      // }
 
-      switch(method) {
-        case 'custom':
-          allStages = customStages;
-          break;
-        default:
-          allStages = [...defaultRoutineStages, ...customStages].filter((value, index, arr) => arr.indexOf(value) === index)
-      }
+      const getStages = (method) => {
+        const methods = {
+          'custom': customStages,
+          'default': [...defaultRoutineStages, ...customStages].filter((value, index, arr) => arr.indexOf(value) === index)
+        }
+        return methods[method] || methods['default'];
+      };
 
-      result[nameSpace] = createRoutineCreator(allStages).apply(null, [nameSpace, ...payloadAndMeta]);
+      result[nameSpace] = createRoutineCreator(getStages(method)).apply(null, [nameSpace, ...payloadAndMeta]);
 
       if (typeof inside === "object" && inside != null){
         iterate(inside);
