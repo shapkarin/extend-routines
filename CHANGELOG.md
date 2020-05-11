@@ -24,3 +24,6 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 ### Version 3.1.1
 - change default stages for `creteSocketRoutine`:
   - rename 'MESSAGE_SENDED' and 'MESSAGE_RECEIVED' to 'SENDED' and 'RECEIVED'
+
+### Version 3.1.2
+- fix typo in readme

@@ -1,4 +1,4 @@
-## Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.
+## Extend any routine with custom stages, create routine with more than default stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
 ![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
