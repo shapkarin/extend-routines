@@ -28,3 +28,4 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 ### Version 3.1.2
 - fix typo in readme
 - rename socket stages to 'CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'
+- createCustomRoutine: allow to pass one stage as a string
