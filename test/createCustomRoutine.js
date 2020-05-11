@@ -31,11 +31,7 @@ describe('createCustomRoutine', () => {
   });
 
   it('should throw an error if stages is not defined', () => {
-    expect(() =>  createCustomRoutine(PREFIX)).to.throw('createCustomRoutine `stages` must be an array');
-  });
-
-  it('should throw an error if stages is a string', () => {
-    expect(() =>  createCustomRoutine(PREFIX, 'STAGE_1')).to.throw('createCustomRoutine `stages` must be an array');
+    expect(() =>  createCustomRoutine(PREFIX)).to.throw('`stages` must not be empty');
   });
 
   it('should create a custom routine', () => {
@@ -113,5 +109,15 @@ describe('createCustomRoutine', () => {
     expect(routine.someLongType.toString()).to.equal(SOME_LONG_TYPE);
     expect(routine.someLongType(payload)).to.deep.equal(someLongTypeAction);
 
+  });
+
+  it('should create extened routine if types arg is string', () => {
+
+    const routine = createCustomRoutine(PREFIX, 'SOME_LONG_TYPE');
+
+    expect(routine.someLongType).to.be.a('function');
+    expect(routine.SOME_LONG_TYPE).to.equal(SOME_LONG_TYPE);
+    expect(routine.someLongType.toString()).to.equal(SOME_LONG_TYPE);
+    expect(routine.someLongType(payload)).to.deep.equal(someAction);
   });
 });

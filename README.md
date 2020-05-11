@@ -1,4 +1,4 @@
-## Extend any routine with custom stages, create routine with more than defafult stages and create custom routine.
+## Extend any routine with custom stages, create routine with more than default stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
 ![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
@@ -37,6 +37,9 @@ note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have a
   - `createSocketRoutine(typePrefix, stages, payloadCreator, metaCreator)`
   - default stages are: 'CONNECTED', 'DISCONNECTED', 'SENDED', 'RECEIVED'
   - you can extend them as well by `stages` argument
+- [create a bunch of routines](#create-routines)
+  - `createRoutines(scheme)`
+  - scheme is a special object, check exmaple
 
 ### Extend any routine:
 ```js
@@ -178,7 +181,7 @@ import { createSocketRoutine } from 'extend-saga-routines';
 const chat = createSocketRoutine('chat', ['WHY', 'NOT']);
 
 console.log(projects._STAGES);
-// ["CONNECTED", "DISCONNECTED", "SENDED", "RECEIVED"];
+// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED']
 console.log(chat.WHY);
 // 'chat/WHY';
 console.log(chat.why(42));
@@ -187,4 +190,158 @@ console.log(chat.NOT);
 // 'chat/NOT';
 console.log(chat.not(42));
 // { type: "chat/NOT", payload: 42 }
+```
+
+### Create routines
+Now you can create a bunch of routines at ones by using `createRoutines`.
+
+#### Examples:
+
+##### Default routines with `createRoutines`:
+```js
+import { createRoutines } from 'extend-saga-routines';
+
+const routines = createRoutines({
+  firstRoutine: null,
+  secondRoutine: null,
+  thirdRoutine: null
+});
+
+console.log(routines.firstRoutine._STAGES);
+// ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL"]
+
+console.log(routines.firstRoutine(42));
+// { type: "firstRoutine/TRIGGER", payload: 42 }
+
+console.log(routines.secondRoutine(42));
+// { type: "secondRoutine/TRIGGER", payload: 42 }
+console.log(routines.secondRoutine.request(42));
+// { type: "secondRoutine/REQUEST", payload: 42 }
+
+// also you can use destructuring assignment
+const { firstRoutine, secondRoutine, thirdRoutine } = routines;
+
+```
+
+##### Extended routines with `createRoutines`:
+```
+To create extended routine inside of bunch
+you need to start with `_` underscore
+each additional stage. 
+Next stage name will be transformed 
+to without underscore. 
+(`_OPEN` => routine.OPEN, type: 'parent/OPEN' ,routine.open() )
+```
+```js
+import { createRoutines } from 'extend-saga-routines';
+
+const routines = createRoutines({
+  firstRoutine: {
+    _OPEN: null,
+    _CLOSE: null
+  },
+  secondRoutine: null,
+  thirdRoutine: null
+});
+
+console.log(routines.firstRoutine._STAGES);
+// ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL", "TOGGLE_INFO", "OPEN", "CLOSE"]
+
+console.log(routines.firstRoutine(42));
+// { type: "firstRoutine/TRIGGER", payload: 42 }
+
+console.log(routines.firstRoutine.open(84));
+// { type: "firstRoutine/OPEN", payload: 84 }
+
+console.log(routines.secondRoutine._STAGES);
+// ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL"]
+
+```
+
+##### Create `custom` or `socket` routine with `createRoutines`:
+```js
+import { createRoutines } from 'extend-saga-routines';
+
+const routines = createRoutines({
+  firstRoutine: [
+    { method: 'custom' },
+    {
+      _OPEN: null,
+      _CLOSE: null
+    }
+  ],
+  secondRoutine: null,
+  socket: [
+    { method: 'socket' },
+    {
+      _ADD: null
+    }
+  ]
+});
+
+console.log(routines.firstRoutine(42))
+// { type: "firstRoutine/OPEN", payload: 42 }
+
+console.log(routines.firstRoutine._STAGES);
+// ['OPEN', 'CLOSE']
+
+console.log(routines.secondRoutine._STAGES);
+// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'. 'ADD']
+
+```
+
+##### Change payload and meta creators with `createRoutines`:
+
+pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
+
+```js
+import { createRoutines } from 'extend-saga-routines';
+
+const routines = createRoutines({
+  multiplyPayloads: {
+    _TRIGGER: [ (payload) => payload * 2 ],
+    _REQUEST: [ (payload) => payload * 3 ],
+  },
+  customMeta: {
+    _TRIGGER: [ null, () => ({ some: 'data' }) ],
+  },
+  payloadAndMeta: {
+    _TRIGGER: [
+      (payload) => payload / 2, 
+      () => ({ info: 'divide' })
+    ]
+  },
+  extendedRoutine: {
+    _PLUS_TEN: [
+      (payload) => payload + 10
+    ]
+  },
+  customRoutine: [
+    { method: 'custom' },
+    {
+      _OPEN: null,
+      _CLOSE: null
+    }
+  ],
+});
+
+console.log(routines.multiplyPayloads(2))
+// { type: "multiplyPayloads/TRIGGER", payload: 4 }
+
+console.log(routines.multiplyPayloads.request(2))
+// { type: "multiplyPayloads/TRIGGER", payload: 6 
+
+console.log(routines.customMeta(2))
+// { type: "customMeta/TRIGGER", payload: 2, meta: { info: "divide" } }
+
+console.log(routines.payloadAndMeta(4))
+// { type: "payloadAndMeta/TRIGGER", payload: 2, meta: { info: "divide" } }
+
+console.log(routines.extendedRoutine(42))
+// { type: "extendedRoutine/PLUS_TEN", payload: 420 }
+
+console.log(routines.extendedRoutine.plusTen(42))
+// { type: "extendedRoutine/PLUS_TEN", payload: 420 }
+
+console.log(routines.customRoutine)
 ```

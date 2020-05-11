@@ -1,11 +1,14 @@
 import { createRoutineCreator } from 'redux-saga-routines';
 
-export default function createSocketRoutine(typePrefix, stages = [], payloadCreator, metaCreator){
+export const defaultSocketStages = ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'];
+
+export default function createSocketRoutine(typePrefix, stages, payloadCreator, metaCreator){
   if(typeof typePrefix !== 'string'){
     throw new Error('`typePrefix` must be a string');
   };
-
-  const defaultSocketStages = ['CONNECTED', 'DISCONNECTED', 'SENDED', 'RECEIVED'];
+  if(!stages || stages.length === 0){
+    throw new Error('`stages` must not be empty');
+  };
 
   const allStages = defaultSocketStages.concat(stages);
 
