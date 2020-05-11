@@ -1,8 +1,8 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-
-import { createRoutines } from '../src';
 import { defaultRoutineStages } from 'redux-saga-routines';
+
+import { createRoutines, defaultSocketStages } from '../src';
 
 const SCHEME = {
   default: null,
@@ -20,42 +20,39 @@ const SCHEME = {
     _FAILURE: [null, () => ({ some: 'data' })],
     _FULFILL: [null, () => ({ some: 'data' })]
   },
-  people: {
-    search: {
-      _ANY: null,
-      _CUSTOM_PAYLOAD: [
-        (payload) => payload * 2
-      ],
-      _CUSTOM_META: [
-        null,
-        () => ({ some: 'info' })
-      ],
-      _TRIGGER: [
-        ({ number }) => number * 2,
-        () => ({ trigger: true })
-      ],
-      _REQUEST: [
-        null,
-        () => ({ ignoreCache: true })
-      ],
-      otherNameSpace: null
-    },
-    customRoutine: [
-      { method: 'custom' },
-      {
-        _OPEN: [
-          ({ number }) => number * 2
-        ],
-        _CLOSE: null
-      }
+  additionalStages: {
+    _ANY: null,
+    _CUSTOM_PAYLOAD: [
+      (payload) => payload * 2
     ],
-    remove: null
-  }
+    _CUSTOM_META: [
+      null,
+      () => ({ some: 'info' })
+    ],
+  },
+  customRoutine: [
+    { method: 'custom' },
+    {
+      _OPEN: [
+        ({ number }) => number * 2
+      ],
+      _CLOSE: null
+    }
+  ],
+  socketRoutine: [
+    { method: 'socket' },
+  ],
+  socketRoutineExtend: [
+    { method: 'socket' },
+    {
+      _ADD: null
+    }
+  ]
 }
 
 describe('create a bunch of routines with `createRoutines`', () => { 
   
-  it('should throw an error scheme is undefined of not an object', () => {
+  it('should throw an error if scheme is undefined or not an object', () => {
     expect(() => createRoutines()).to.throw('`scheme` must be an object');
   });
 
@@ -255,12 +252,12 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should add custom stages to routine', () => {
-    const routine = createRoutines(SCHEME).search;
+    const routine = createRoutines(SCHEME).additionalStages;
 
     expect(routine._STAGES).to.deep.equal([...defaultRoutineStages, 'ANY', 'CUSTOM_PAYLOAD', 'CUSTOM_META']);
     // expect(routine._PREFIX).to.equal(PREFIX);
 
-    const PREFIX = 'search';
+    const PREFIX = 'additionalStages';
     const ANY = `${PREFIX}/ANY`;
     const payload = { some: 'data' }
     const anyAction = {
@@ -275,9 +272,9 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should add payloadCreator to custom stage', () => {
-    const routine = createRoutines(SCHEME).search;
+    const routine = createRoutines(SCHEME).additionalStages;
 
-    const PREFIX = 'search';
+    const PREFIX = 'additionalStages';
     const payload = 42;
     const customPayloadAction = {
       type: `${PREFIX}/CUSTOM_PAYLOAD`,
@@ -288,9 +285,9 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should add metaCreator to custom stage', () => {
-    const routine = createRoutines(SCHEME).search;
+    const routine = createRoutines(SCHEME).additionalStages;
 
-    const PREFIX = 'search';
+    const PREFIX = 'additionalStages';
     const payload = 42;
     const customMetaAction = {
       type: `${PREFIX}/CUSTOM_META`,
@@ -302,5 +299,25 @@ describe('create a bunch of routines with `createRoutines`', () => {
 
     expect(routine.customMeta(payload)).to.deep.equal(customMetaAction);
   });
+
+  it('should create a custom routines (without deafult stages)', () => {
+    const routine = createRoutines(SCHEME).customRoutine;
+
+    expect(routine._STAGES).to.deep.equal(['OPEN', 'CLOSE']);
+  });
+
+  it('should create a socket routine', () => {
+    const routine = createRoutines(SCHEME).socketRoutine;
+
+    expect(routine._STAGES).to.deep.equal(defaultSocketStages);
+  });
+
+  it('should create a socket routine with extend stages', () => {
+    const routine = createRoutines(SCHEME).socketRoutineExtend;
+
+    expect(routine._STAGES).to.deep.equal([...defaultSocketStages, 'ADD']);
+  });
+
+  // it('should use scheme nesting', () => {})
 
 });

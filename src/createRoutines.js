@@ -1,4 +1,5 @@
 import { createRoutineCreator, defaultRoutineStages } from 'redux-saga-routines';
+import { defaultSocketStages } from './createSocketRoutine';
 
 export default function createRoutines(scheme){
   if(typeof scheme !== 'object' || Array.isArray(scheme)){
@@ -36,9 +37,11 @@ export default function createRoutines(scheme){
         );
       } 
 
+      // todo: use API methods instead of create stages to each method
       const getStages = (method) => {
         const methods = {
           'custom': customStages,
+          'socket': [...defaultSocketStages, ...customStages],
           'default': [...defaultRoutineStages, ...customStages].filter((value, index, arr) => arr.indexOf(value) === index)
         }
         return methods[method] || methods['default'];
