@@ -35,16 +35,17 @@ export default function createRoutines(scheme){
           ],
           payloadAndMeta
         );
-      } else if(!nameSpace.startsWith('_')){
+      } 
+      // else if(!nameSpace.startsWith('_')){
         
-      }
+      // }
 
       switch(method) {
         case 'custom':
           allStages = customStages;
           break;
         default:
-          allStages = [...defaultRoutineStages, ...customStages]
+          allStages = [...defaultRoutineStages, ...customStages].filter((value, index, arr) => arr.indexOf(value) === index)
       }
 
       result[nameSpace] = createRoutineCreator(allStages).apply(null, [nameSpace, ...payloadAndMeta]);
