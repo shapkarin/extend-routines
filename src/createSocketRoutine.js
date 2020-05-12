@@ -6,9 +6,6 @@ export default function createSocketRoutine(typePrefix, stages, payloadCreator, 
   if(typeof typePrefix !== 'string'){
     throw new Error('`typePrefix` must be a string');
   };
-  if(!stages || stages.length === 0){
-    throw new Error('`stages` must not be empty');
-  };
 
   const allStages = defaultSocketStages.concat(stages);
 

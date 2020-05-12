@@ -1,10 +1,21 @@
-import { createRoutineCreator, defaultRoutineStages } from 'redux-saga-routines';
-import { defaultSocketStages } from './createSocketRoutine';
+import { defaultRoutineStages } from 'redux-saga-routines';
+import * as routeCreators from './index'; 
+
+
+const getCreator = method => {
+  const methods = {
+    'custom': routeCreators.createCustomRoutine,
+    'socket': routeCreators.createSocketRoutine,
+    'default': routeCreators.createExtendedRoutine
+  };
+  return methods[method] || methods['default'];
+};
 
 export default function createRoutines(scheme){
   if(typeof scheme !== 'object' || Array.isArray(scheme)){
     throw new Error('`scheme` must be an object');
   };
+
 
   let result = {};
 
@@ -13,19 +24,22 @@ export default function createRoutines(scheme){
       if(nameSpace.startsWith('_')) {
         continue;
       }
-      let payloadAndMeta = [];
+      let payloadAndMeta = [null, null];
       let customStages = [];
       let method = '';
       let inside = null;
 
       if(Array.isArray(value)){
-        method = value[0].method;
         inside = value[1];
+        method = value[0]['method']
       } else {
         inside = value;
+        if(typeof value === 'string'){
+          method = value;
+        }
       }
 
-      if(inside != null){
+      if(inside != null && typeof inside === 'object'){
         let insideStages = Object.keys(inside).filter(i => i.startsWith('_'))
         customStages = insideStages.reduce((acc, cur) => !defaultRoutineStages.includes(cur) ? [...acc, cur.substring(1)] : acc ,[]);
         payloadAndMeta = insideStages.reduce((acc, cur) => 
@@ -37,17 +51,7 @@ export default function createRoutines(scheme){
         );
       } 
 
-      // todo: use API methods instead of create stages to each method
-      const getStages = (method) => {
-        const methods = {
-          'custom': customStages,
-          'socket': [...defaultSocketStages, ...customStages],
-          'default': [...defaultRoutineStages, ...customStages].filter((value, index, arr) => arr.indexOf(value) === index)
-        }
-        return methods[method] || methods['default'];
-      };
-
-      result[nameSpace] = createRoutineCreator(getStages(method)).apply(null, [nameSpace, ...payloadAndMeta]);
+      result[nameSpace] = getCreator(method).apply(null, [nameSpace, customStages, ...payloadAndMeta]);
 
       if (typeof inside === "object" && inside != null){
         iterate(inside);

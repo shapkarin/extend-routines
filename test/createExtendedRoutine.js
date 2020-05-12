@@ -52,10 +52,6 @@ describe('createExtendedRoutine', () => {
     expect(() =>  createExtendedRoutine()).to.throw('`typePrefix` must be a string');
   });
 
-  it('should throw an error if stages is not defined', () => {
-    expect(() =>  createExtendedRoutine(PREFIX)).to.throw('`stages` must not be empty');
-  });
-
   it('should create a routine with more than `redux-saga-routines` default stages', () => {
 
     const routine = createExtendedRoutine(PREFIX, ['SOME_LONG_TYPE', 'OTHER']);
