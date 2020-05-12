@@ -4,60 +4,62 @@ import { defaultRoutineStages } from 'redux-saga-routines';
 
 import { createRoutines, defaultSocketStages } from '../src';
 
-const SCHEME = {
-  default: null,
-  multiplyPayloads: {
-    _TRIGGER: [(payload) => payload * 2],
-    _REQUEST: [(payload) => payload * 3],
-    _SUCCESS: [(payload) => payload * 4],
-    _FAILURE: [(payload) => payload * 5],
-    _FULFILL: [(payload) => payload * 6]
-  },
-  customMeta: {
-    _TRIGGER: [null, () => ({ some: 'data' })],
-    _REQUEST: [null, () => ({ some: 'data' })],
-    _SUCCESS: [null, () => ({ some: 'data' })],
-    _FAILURE: [null, () => ({ some: 'data' })],
-    _FULFILL: [null, () => ({ some: 'data' })]
-  },
-  additionalStages: {
-    _ANY: null,
-    _CUSTOM_PAYLOAD: [
-      (payload) => payload * 2
-    ],
-    _CUSTOM_META: [
-      null,
-      () => ({ some: 'info' })
-    ],
-  },
-  customRoutine: [
-    { method: 'custom' },
-    {
-      _OPEN: [
-        ({ number }) => number * 2
-      ],
-      _CLOSE: null
-    }
-  ],
-  socketRoutine: [
-    { method: 'socket' },
-  ],
-  socketRoutineExtend: [
-    { method: 'socket' },
-    {
-      _ADD: null
-    }
-  ],
-  stringDefineDefault: 'default',
-  stringDefineSocket: 'socket',
-}
-
 describe('create a bunch of routines with `createRoutines`', () => { 
+  
+  const SCHEME = {
+    default: null,
+    multiplyPayloads: {
+      _TRIGGER: [(payload) => payload * 2],
+      _REQUEST: [(payload) => payload * 3],
+      _SUCCESS: [(payload) => payload * 4],
+      _FAILURE: [(payload) => payload * 5],
+      _FULFILL: [(payload) => payload * 6]
+    },
+    customMeta: {
+      _TRIGGER: [null, () => ({ some: 'data' })],
+      _REQUEST: [null, () => ({ some: 'data' })],
+      _SUCCESS: [null, () => ({ some: 'data' })],
+      _FAILURE: [null, () => ({ some: 'data' })],
+      _FULFILL: [null, () => ({ some: 'data' })]
+    },
+    additionalStages: {
+      _ANY: null,
+      _CUSTOM_PAYLOAD: [
+        (payload) => payload * 2
+      ],
+      _CUSTOM_META: [
+        null,
+        () => ({ some: 'info' })
+      ],
+    },
+    customRoutine: [
+      { method: 'custom' },
+      {
+        _OPEN: [
+          ({ number }) => number * 2
+        ],
+        _CLOSE: null
+      }
+    ],
+    socketRoutine: [
+      { method: 'socket' },
+    ],
+    socketRoutineExtend: [
+      { method: 'socket' },
+      {
+        _ADD: null
+      }
+    ],
+    stringDefineDefault: 'default',
+    stringDefineSocket: 'socket',
+  }
+  
+  const DEFAULT_ROUTINES = ['one', 'two', 'three'];
 
   const routines = createRoutines(SCHEME);
   
   it('should throw an error if scheme is undefined or not an object', () => {
-    expect(() => createRoutines()).to.throw('`scheme` must be an object');
+    expect(() => createRoutines()).to.throw('`scheme` must be an object or array');
   });
 
   it('should create default routine', () => {
@@ -323,11 +325,117 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should works fine with routines method as a string', () => {
-    const { stringDefineDefault, stringDefineSocket } = createRoutines(SCHEME);
+    const { stringDefineDefault, stringDefineSocket } = routines;
 
     expect(stringDefineDefault._STAGES).to.deep.equal(defaultRoutineStages);
     expect(stringDefineSocket._STAGES).to.deep.equal([...defaultSocketStages]);
   });
+
+  it('should create default routines with second argument', () => {
+    const { one, two, three } = createRoutines(SCHEME, DEFAULT_ROUTINES);
+
+    const PREFIX = 'one';
+    const TRIGGER = `${PREFIX}/TRIGGER`;
+    const REQUEST = `${PREFIX}/REQUEST`;
+    const SUCCESS = `${PREFIX}/SUCCESS`;
+    const FAILURE = `${PREFIX}/FAILURE`;
+    const FULFILL = `${PREFIX}/FULFILL`;
+
+    const payload = 42;
+    const triggerAction = ({ type: TRIGGER, payload });
+    const requestAction = ({ type: REQUEST, payload });
+    const successAction = ({ type: SUCCESS, payload });
+    const failureAction = ({ type: FAILURE, payload });
+    const fulfillAction = ({ type: FULFILL, payload })
+
+    expect(one._STAGES).to.deep.equal(defaultRoutineStages);
+    expect(two._STAGES).to.deep.equal(defaultRoutineStages);
+    expect(three._STAGES).to.deep.equal(defaultRoutineStages);
+
+    expect(one).to.be.a('function');
+    expect(one.toString()).to.equal(TRIGGER);
+    expect(one(payload)).to.deep.equal(triggerAction);
+
+    expect(one.trigger).to.be.a('function');
+    expect(one.TRIGGER).to.equal(TRIGGER);
+    expect(one.trigger.toString()).to.equal(TRIGGER);
+    expect(one.trigger(payload)).to.deep.equal(triggerAction);
+
+    expect(one.request).to.be.a('function');
+    expect(one.REQUEST).to.equal(REQUEST);
+    expect(one.request.toString()).to.equal(REQUEST);
+    expect(one.request(payload)).to.deep.equal(requestAction);
+
+    expect(one.success).to.be.a('function');
+    expect(one.SUCCESS).to.equal(SUCCESS);
+    expect(one.success.toString()).to.equal(SUCCESS);
+    expect(one.success(payload)).to.deep.equal(successAction);
+
+    expect(one.failure).to.be.a('function');
+    expect(one.FAILURE).to.equal(FAILURE);
+    expect(one.failure.toString()).to.equal(FAILURE);
+    expect(one.failure(payload)).to.deep.equal(failureAction);
+
+    expect(one.fulfill).to.be.a('function');
+    expect(one.FULFILL).to.equal(FULFILL);
+    expect(one.fulfill.toString()).to.equal(FULFILL);
+    expect(one.fulfill(payload)).to.deep.equal(fulfillAction);
+
+  });
+
+  it('should also may use scheme argument as defaultRoutines', () => {
+    const { one, two, three } = createRoutines(DEFAULT_ROUTINES);
+
+    const PREFIX = 'one';
+    const TRIGGER = `${PREFIX}/TRIGGER`;
+    const REQUEST = `${PREFIX}/REQUEST`;
+    const SUCCESS = `${PREFIX}/SUCCESS`;
+    const FAILURE = `${PREFIX}/FAILURE`;
+    const FULFILL = `${PREFIX}/FULFILL`;
+
+    const payload = 42;
+    const triggerAction = ({ type: TRIGGER, payload });
+    const requestAction = ({ type: REQUEST, payload });
+    const successAction = ({ type: SUCCESS, payload });
+    const failureAction = ({ type: FAILURE, payload });
+    const fulfillAction = ({ type: FULFILL, payload })
+
+    expect(one._STAGES).to.deep.equal(defaultRoutineStages);
+    expect(two._STAGES).to.deep.equal(defaultRoutineStages);
+    expect(three._STAGES).to.deep.equal(defaultRoutineStages);
+
+    expect(one).to.be.a('function');
+    expect(one.toString()).to.equal(TRIGGER);
+    expect(one(payload)).to.deep.equal(triggerAction);
+
+    expect(one.trigger).to.be.a('function');
+    expect(one.TRIGGER).to.equal(TRIGGER);
+    expect(one.trigger.toString()).to.equal(TRIGGER);
+    expect(one.trigger(payload)).to.deep.equal(triggerAction);
+
+    expect(one.request).to.be.a('function');
+    expect(one.REQUEST).to.equal(REQUEST);
+    expect(one.request.toString()).to.equal(REQUEST);
+    expect(one.request(payload)).to.deep.equal(requestAction);
+
+    expect(one.success).to.be.a('function');
+    expect(one.SUCCESS).to.equal(SUCCESS);
+    expect(one.success.toString()).to.equal(SUCCESS);
+    expect(one.success(payload)).to.deep.equal(successAction);
+
+    expect(one.failure).to.be.a('function');
+    expect(one.FAILURE).to.equal(FAILURE);
+    expect(one.failure.toString()).to.equal(FAILURE);
+    expect(one.failure(payload)).to.deep.equal(failureAction);
+
+    expect(one.fulfill).to.be.a('function');
+    expect(one.FULFILL).to.equal(FULFILL);
+    expect(one.fulfill.toString()).to.equal(FULFILL);
+    expect(one.fulfill(payload)).to.deep.equal(fulfillAction);
+
+  });
+
+    
 
   // it('should use scheme nesting', () => {})
 
