@@ -47,17 +47,21 @@ const SCHEME = {
     {
       _ADD: null
     }
-  ]
+  ],
+  stringDefineDefault: 'default',
+  stringDefineSocket: 'socket',
 }
 
 describe('create a bunch of routines with `createRoutines`', () => { 
+
+  const routines = createRoutines(SCHEME);
   
   it('should throw an error if scheme is undefined or not an object', () => {
     expect(() => createRoutines()).to.throw('`scheme` must be an object');
   });
 
   it('should create default routine', () => {
-    const routine = createRoutines(SCHEME).default;
+    const routine = routines.default;
     
     const PREFIX = 'default';
     const TRIGGER = `${PREFIX}/TRIGGER`;
@@ -124,7 +128,7 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should change payload to default stages', () => {
-    const routine = createRoutines(SCHEME).multiplyPayloads;
+    const routine = routines.multiplyPayloads;
     
     const PREFIX = 'multiplyPayloads';
     const TRIGGER = `${PREFIX}/TRIGGER`;
@@ -188,7 +192,7 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should change meta to default stages', () => {
-    const routine = createRoutines(SCHEME).customMeta;
+    const routine = routines.customMeta;
     
     const PREFIX = 'customMeta';
     const TRIGGER = `${PREFIX}/TRIGGER`;
@@ -252,7 +256,7 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should add custom stages to routine', () => {
-    const routine = createRoutines(SCHEME).additionalStages;
+    const routine = routines.additionalStages;
 
     expect(routine._STAGES).to.deep.equal([...defaultRoutineStages, 'ANY', 'CUSTOM_PAYLOAD', 'CUSTOM_META']);
     // expect(routine._PREFIX).to.equal(PREFIX);
@@ -285,7 +289,7 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should add metaCreator to custom stage', () => {
-    const routine = createRoutines(SCHEME).additionalStages;
+    const routine = routines.additionalStages;
 
     const PREFIX = 'additionalStages';
     const payload = 42;
@@ -301,21 +305,28 @@ describe('create a bunch of routines with `createRoutines`', () => {
   });
 
   it('should create a custom routines (without deafult stages)', () => {
-    const routine = createRoutines(SCHEME).customRoutine;
+    const routine = routines.customRoutine;
 
     expect(routine._STAGES).to.deep.equal(['OPEN', 'CLOSE']);
   });
 
   it('should create a socket routine', () => {
-    const routine = createRoutines(SCHEME).socketRoutine;
+    const routine = routines.socketRoutine;
 
     expect(routine._STAGES).to.deep.equal(defaultSocketStages);
   });
 
   it('should create a socket routine with extend stages', () => {
-    const routine = createRoutines(SCHEME).socketRoutineExtend;
+    const routine = routines.socketRoutineExtend;
 
     expect(routine._STAGES).to.deep.equal([...defaultSocketStages, 'ADD']);
+  });
+
+  it('should works fine with routines method as a string', () => {
+    const { stringDefineDefault, stringDefineSocket } = createRoutines(SCHEME);
+
+    expect(stringDefineDefault._STAGES).to.deep.equal(defaultRoutineStages);
+    expect(stringDefineSocket._STAGES).to.deep.equal([...defaultSocketStages]);
   });
 
   // it('should use scheme nesting', () => {})

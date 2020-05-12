@@ -33,3 +33,9 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 
 ### Version 3.2.1
 - Update webpack
+
+### Version 3.2.2
+- createCustomRoutine
+  - able to pass `'default'` and `'socket'` methods as a string
+  - some refact
+- able to pass empty stages to `createExtendedRoutine` and `createSocketRoutine`
