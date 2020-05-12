@@ -38,3 +38,4 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 - createCustomRoutine
   - able to pass `'default'` and `'socket'` methods as a string
   - some refact
+- able to pass empty stages to `createExtendedRoutine` and `createSocketRoutine`
