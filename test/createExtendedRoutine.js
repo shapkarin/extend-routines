@@ -1,7 +1,8 @@
+
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
-import { createExtendedRoutine } from '../src';
+import { createExtendedRoutine, defaultRoutineStages } from '../src';
 
 const PREFIX = 'PREFIX';
 const TRIGGER = `${PREFIX}/TRIGGER`;
@@ -52,9 +53,14 @@ describe('createExtendedRoutine', () => {
     expect(() =>  createExtendedRoutine()).to.throw('`typePrefix` must be a string');
   });
 
-  it('should create a routine with more than `redux-saga-routines` default stages', () => {
+  it('should create a routine with more than `redux-saga-routines` default stages', () => {})
 
-    const routine = createExtendedRoutine(PREFIX, ['SOME_LONG_TYPE', 'OTHER']);
+  it('should create a routine with more than default socket stages', () => {
+
+    const stages = ['SOME_LONG_TYPE', 'OTHER'];
+    const routine = createExtendedRoutine(PREFIX, stages);
+
+    expect(routine._STAGES).to.deep.equal([...defaultRoutineStages, ...stages]);
 
     expect(routine.trigger).to.be.a('function');
     expect(routine.TRIGGER).to.equal(TRIGGER);
