@@ -38,8 +38,10 @@ note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have a
   - default stages are: 'CONNECTED', 'DISCONNECTED', 'SENDED', 'RECEIVED'
   - you can extend them as well by `stages` argument
 - [create a bunch of routines](#create-routines)
-  - `createRoutines(scheme)`
-  - scheme is a special object, check exmaple
+  - `createRoutines(scheme, defaultRoutines)`
+  - scheme is a special object, check exmaples
+  - any routine in `scheme` can be extended
+  - if you need only default routines you can replace `scheme` with `defaultRoutines` (createRoutines(defaultRoutines))
 
 ### Extend any routine:
 ```js
@@ -207,7 +209,32 @@ const routines = createRoutines({
   thirdRoutine: null
 });
 
+// or with defaultRoutines argument
+const routines2 = createRoutines({ alsoSomeBasci: null }, [
+  'firstRoutine'
+  'secondRoutine'
+  'thirdRoutine'
+]);
+
+// or
+const routines3 = createRoutines(null, [
+  'firstRoutine'
+  'secondRoutine'
+  'thirdRoutine'
+]);
+
+// or if you even don't need any extenened routines or 
+const routines4 = createRoutines([
+  'firstRoutine'
+  'secondRoutine'
+  'thirdRoutine'
+]);
+
+
 console.log(routines.firstRoutine._STAGES);
+// ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL"]
+
+console.log(routines4.firstRoutine._STAGES);
 // ["TRIGGER", "REQUEST", "SUCCESS", "FAILURE", "FULFILL"]
 
 console.log(routines.firstRoutine(42));

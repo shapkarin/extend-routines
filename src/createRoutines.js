@@ -11,13 +11,19 @@ const getCreator = method => {
   return methods[method] || methods['default'];
 };
 
-export default function createRoutines(scheme){
-  if(typeof scheme !== 'object' || Array.isArray(scheme)){
-    throw new Error('`scheme` must be an object');
+export default function createRoutines(scheme, defaultRoutines){
+  if(typeof scheme !== 'object'){
+    throw new Error('`scheme` must be an object or array');
   };
 
-
   let result = {};
+
+  let plainRoutines = [];
+  if(Array.isArray(scheme) || Array.isArray(defaultRoutines)){
+    plainRoutines = defaultRoutines || scheme;
+    result = plainRoutines.reduce((acc, nameSpace) => ({...acc, [nameSpace]: routeCreators.createExtendedRoutine(nameSpace) }),{})
+    return result;
+  }
 
   function iterate(obj){
     for(let [nameSpace, value] of Object.entries(obj)) {
