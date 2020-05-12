@@ -3,25 +3,26 @@ import { expect } from 'chai';
 
 import { createCustomRoutine } from '../src';
 
-const PREFIX = 'PREFIX';
-
-const SOME_LONG_TYPE = `${PREFIX}/SOME_LONG_TYPE`;
-const payload = {
-  some: 'data',
-};
-
-const someAction = {
-  type: SOME_LONG_TYPE,
-  payload,
-}
-const OTHER = `${PREFIX}/OTHER`;
-const otherAction = {
-  type: OTHER,
-  payload,
-}
-
 
 describe('createCustomRoutine', () => {
+
+  const PREFIX = 'PREFIX';
+
+  const SOME_LONG_TYPE = `${PREFIX}/SOME_LONG_TYPE`;
+  const payload = {
+    some: 'data',
+  };
+
+  const someAction = {
+    type: SOME_LONG_TYPE,
+    payload,
+  }
+  const OTHER = `${PREFIX}/OTHER`;
+  const otherAction = {
+    type: OTHER,
+    payload,
+  }
+
   it('should be a function', () => {
     expect(createCustomRoutine).to.be.a('function');
   });
