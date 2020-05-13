@@ -435,15 +435,6 @@ describe('create a bunch of routines with `createRoutines`', () => {
 
   });
 
-  
-  // it('should throws some errors if scheme is not valid', () => {
-  //   const routines = createRoutines({ some: true, other: () => ({ hm: '1' }), next: 200 });
-
-  //   console.log({ routines })
-  // });
-
-    
-
   // it('should use scheme nesting', () => {})
 
 });
