@@ -434,9 +434,7 @@ describe('create a bunch of routines with `createRoutines`', () => {
     expect(one.fulfill(payload)).to.deep.equal(fulfillAction);
 
   });
-
     
-
   // it('should use scheme nesting', () => {})
 
 });
