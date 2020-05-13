@@ -206,7 +206,8 @@ import { createRoutines } from 'extend-saga-routines';
 const routines = createRoutines({
   firstRoutine: null,
   secondRoutine: null,
-  thirdRoutine: null
+  // or the same
+  thirdRoutine: 'default'
 });
 
 // or with defaultRoutines argument
