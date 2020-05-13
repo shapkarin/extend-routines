@@ -265,11 +265,11 @@ import { createRoutines } from 'extend-saga-routines';
 
 const routines = createRoutines({
   firstRoutine: {
-    _OPEN: null,
-    _CLOSE: null
+    _OPEN: 'default',
+    _CLOSE: 'default'
   },
-  secondRoutine: null,
-  thirdRoutine: null
+  secondRoutine: 'default',
+  thirdRoutine: 'default'
 });
 
 console.log(routines.firstRoutine._STAGES);
@@ -294,15 +294,15 @@ const routines = createRoutines({
   firstRoutine: [
     { method: 'custom' },
     {
-      _OPEN: null,
-      _CLOSE: null
+      _OPEN: 'default',
+      _CLOSE: 'default'
     }
   ],
-  secondRoutine: null,
-  socket: [
+  socket: 'socket',
+  socketExtended: [
     { method: 'socket' },
     {
-      _ADD: null
+      _ADD: 'default'
     }
   ]
 });
@@ -313,8 +313,11 @@ console.log(routines.firstRoutine(42))
 console.log(routines.firstRoutine._STAGES);
 // ['OPEN', 'CLOSE']
 
-console.log(routines.secondRoutine._STAGES);
-// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'. 'ADD']
+console.log(routines.socket._STAGES);
+// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED']
+
+console.log(routines.socketExtended._STAGES);
+// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED', 'ADD']
 
 ```
 
@@ -366,10 +369,10 @@ console.log(routines.payloadAndMeta(4))
 // { type: "payloadAndMeta/TRIGGER", payload: 2, meta: { info: "divide" } }
 
 console.log(routines.extendedRoutine(42))
-// { type: "extendedRoutine/PLUS_TEN", payload: 420 }
+// { type: "extendedRoutine/PLUS_TEN", payload: 52 }
 
 console.log(routines.extendedRoutine.plusTen(42))
-// { type: "extendedRoutine/PLUS_TEN", payload: 420 }
+// { type: "extendedRoutine/PLUS_TEN", payload: 52 }
 
 console.log(routines.customRoutine)
 ```
