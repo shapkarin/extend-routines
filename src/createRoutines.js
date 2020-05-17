@@ -30,8 +30,8 @@ export default function createRoutines(scheme, defaultRoutines){
       if(nameSpace.startsWith('_')) {
         continue;
       }
-      let payloadAndMeta = [null, null];
-      let customStages = [];
+
+      let creatorArgumants = [[], null, null];
       let method = '';
       let inside = null;
 
@@ -47,17 +47,17 @@ export default function createRoutines(scheme, defaultRoutines){
 
       if(inside != null && typeof inside === 'object'){
         let insideStages = Object.keys(inside).filter(i => i.startsWith('_'))
-        customStages = insideStages.reduce((acc, cur) => !defaultRoutineStages.includes(cur) ? [...acc, cur.substring(1)] : acc ,[]);
-        payloadAndMeta = insideStages.reduce((acc, cur) => 
+        creatorArgumants = insideStages.reduce((acc, cur) => 
           [
-            { ...acc[0], [cur.substring(1).toLowerCase()]: inside[cur] !== null ? inside[cur][0] : null },
-            { ...acc[1], [cur.substring(1).toLowerCase()]: inside[cur] !== null ? inside[cur][1] : null }
+            !defaultRoutineStages.includes(cur) ? [...acc[0], cur.substring(1)] : acc[0],
+            { ...acc[1], [cur.substring(1).toLowerCase()]: inside[cur] !== null ? inside[cur][0] : null },
+            { ...acc[2], [cur.substring(1).toLowerCase()]: inside[cur] !== null ? inside[cur][1] : null }
           ],
-          payloadAndMeta
+          creatorArgumants
         );
       } 
 
-      result[nameSpace] = getCreator(method).apply(null, [nameSpace, customStages, ...payloadAndMeta]);
+      result[nameSpace] = getCreator(method).apply(null, [nameSpace, ...creatorArgumants]);
 
       if (typeof inside === "object" && inside != null){
         iterate(inside);
