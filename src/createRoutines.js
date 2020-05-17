@@ -18,9 +18,8 @@ export default function createRoutines(scheme, defaultRoutines){
 
   let result = {};
 
-  let plainRoutines = [];
   if(Array.isArray(scheme) || Array.isArray(defaultRoutines)){
-    plainRoutines = defaultRoutines || scheme;
+    const plainRoutines = defaultRoutines || scheme;
     result = plainRoutines.reduce((acc, nameSpace) => ({...acc, [nameSpace]: routeCreators.createExtendedRoutine(nameSpace) }),{})
     return result;
   }
