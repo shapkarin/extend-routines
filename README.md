@@ -35,7 +35,7 @@ note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have a
     - metaCreator: yours custom payloadCreator to use with current stage, optional
 - [create socket routine that you can extend](#socket-routine)
   - `createSocketRoutine(typePrefix, stages, payloadCreator, metaCreator)`
-  - default stages are: 'CONNECTED', 'DISCONNECTED', 'SENDED', 'RECEIVED'
+  - default stages are: 'CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'
   - you can extend them as well by `stages` argument
 - [create a bunch of routines](#create-routines)
   - `createRoutines(scheme, defaultRoutines)`
@@ -183,7 +183,7 @@ import { createSocketRoutine } from 'extend-saga-routines';
 const chat = createSocketRoutine('chat', ['WHY', 'NOT']);
 
 console.log(projects._STAGES);
-// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED']
+// ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED', 'WHY', 'NOT']
 console.log(chat.WHY);
 // 'chat/WHY';
 console.log(chat.why(42));
