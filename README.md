@@ -1,4 +1,6 @@
-## Extend any routine with custom stages, create routine with more than default stages and create custom routine.
+# extend-saga-routines
+
+> Extend any routine with custom stages, create routine with more than default stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
 ![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
@@ -6,7 +8,7 @@
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
-### Install 
+## Install 
 
 ```
 npm install --save extend-saga-routines
@@ -14,7 +16,7 @@ npm install --save extend-saga-routines
 
 note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
 
-### With that package you can
+## With this package you can
 - [extend any routine](#extend-any-routine):
   - `extendRoutine(routine, stages, payloadCreator, metaCreator)`
     - routine: any routine you already have, required
