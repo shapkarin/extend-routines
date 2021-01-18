@@ -16,7 +16,7 @@ npm install --save extend-saga-routines
 
 note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
 
-## Examples of package usage
+## Package Usage
 - [extend any routine](#extend-any-routine):
   - `extendRoutine(routine, stages, payloadCreator, metaCreator)`
     - routine: any routine you already have, required
