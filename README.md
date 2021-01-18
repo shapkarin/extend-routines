@@ -104,7 +104,7 @@ console.log(overwritedDefault.trigger(42))
 // { type: 'overwrited/default/TRIGGER', payload: 84 }
 ```
 
-### Create routine that has more that just `redux-saga-routines` default stages:
+###  `redux-saga-routines`:
 
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
@@ -151,7 +151,7 @@ console.log(customPayloadMeta.multipliedPayload(2))
 // { type: "payload/meta/MILTIPLIED_PAYLOAD", payload: 4, meta: { some: "meta" }};
 ```
 
-### If you don't need default routine stages you can use `createCustomRoutine`:
+###  `createCustomRoutine`:
 ```javascript
 import { createCustomRoutine } from 'extend-saga-routines';
 
@@ -197,11 +197,11 @@ console.log(chat.not(42));
 ```
 
 ### Create routines
-Now you can create a bunch of routines at ones by using `createRoutines`.
+Now you can create multiple routines at once by using `createRoutines`.
 
-#### Examples:
+## Examples:
 
-##### Default routines with `createRoutines`:
+#### Default routines using `createRoutines`:
 ```js
 import { createRoutines } from 'extend-saga-routines';
 
@@ -253,7 +253,7 @@ const { firstRoutine, secondRoutine, thirdRoutine } = routines;
 
 ```
 
-##### Extended routines with `createRoutines`:
+#### Extended routines using `createRoutines`:
 ```
 To create extended routine inside of bunch
 you need to start with `_` underscore
@@ -288,7 +288,7 @@ console.log(routines.secondRoutine._STAGES);
 
 ```
 
-##### Create `custom` or `socket` routine with `createRoutines`:
+#### Create `custom` or `socket` routine using `createRoutines`:
 ```js
 import { createRoutines } from 'extend-saga-routines';
 
@@ -323,7 +323,7 @@ console.log(routines.socketExtended._STAGES);
 
 ```
 
-##### Change payload and meta creators with `createRoutines`:
+#### Change payload and meta creators using `createRoutines`:
 
 pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
 
