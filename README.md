@@ -14,7 +14,7 @@
 npm install --save extend-saga-routines
 ```
 
-note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
+Note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
 
 ## Package Usage
 - [extend any routine](#extend-any-routine):
@@ -121,7 +121,7 @@ console.log(projects.toggle({ id: 42 }))
 // { type: "projects/TOGGLE", payload: { id: 42 } }
 ```
 
-You can pass an array:
+Passing an array:
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
 
@@ -138,7 +138,7 @@ console.log(other.close(42));
 // { type: "other/CLOSE", payload: 42 }
 ```
 
-And also you can add cusom payload and meta creators:
+Adding custom payload and meta creators:
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
 
@@ -176,7 +176,7 @@ console.log(steps.goTo(42));
 // { type: "steps/GO_TO", payload: 42 }
 ```
 
-Also you can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
+You can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
 
 ### Socket Routine
 ```javascript
@@ -325,7 +325,7 @@ console.log(routines.socketExtended._STAGES);
 
 #### Change payload and meta creators using `createRoutines`:
 
-pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
+Pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
 
 ```js
 import { createRoutines } from 'extend-saga-routines';
