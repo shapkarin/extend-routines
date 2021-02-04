@@ -1,4 +1,6 @@
-## Extend any routine with custom stages, create routine with more than default stages and create custom routine.
+# extend-saga-routines
+
+> Extend any routine with custom stages, create routine with more than default stages and create custom routine.
 
 ![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
 ![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
@@ -6,15 +8,15 @@
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
-### Install 
+## Install 
 
 ```
 npm install --save extend-saga-routines
 ```
 
-note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
+Note: from `ver 3` it uses updated `redux-saga-routines` API, so you must have at least `redux-saga-routines 3.2.0` installed.
 
-### With that package you can
+## Package Usage
 - [extend any routine](#extend-any-routine):
   - `extendRoutine(routine, stages, payloadCreator, metaCreator)`
     - routine: any routine you already have, required
@@ -102,7 +104,7 @@ console.log(overwritedDefault.trigger(42))
 // { type: 'overwrited/default/TRIGGER', payload: 84 }
 ```
 
-### Create routine that has more that just `redux-saga-routines` default stages:
+###  `redux-saga-routines`:
 
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
@@ -119,7 +121,7 @@ console.log(projects.toggle({ id: 42 }))
 // { type: "projects/TOGGLE", payload: { id: 42 } }
 ```
 
-You can pass an array:
+Passing an array:
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
 
@@ -136,7 +138,7 @@ console.log(other.close(42));
 // { type: "other/CLOSE", payload: 42 }
 ```
 
-And also you can add cusom payload and meta creators:
+Adding custom payload and meta creators:
 ```javascript
 import { createExtendedRoutine } from 'extend-saga-routines';
 
@@ -149,7 +151,7 @@ console.log(customPayloadMeta.multipliedPayload(2))
 // { type: "payload/meta/MILTIPLIED_PAYLOAD", payload: 4, meta: { some: "meta" }};
 ```
 
-### If you don't need default routine stages you can use `createCustomRoutine`:
+###  `createCustomRoutine`:
 ```javascript
 import { createCustomRoutine } from 'extend-saga-routines';
 
@@ -174,7 +176,7 @@ console.log(steps.goTo(42));
 // { type: "steps/GO_TO", payload: 42 }
 ```
 
-Also you can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
+You can add yours custom payload and meta creators to `createCustomRoutine` in the same way as in the `createExtendedRoutine` example.
 
 ### Socket Routine
 ```javascript
@@ -195,11 +197,11 @@ console.log(chat.not(42));
 ```
 
 ### Create routines
-Now you can create a bunch of routines at ones by using `createRoutines`.
+Now you can create multiple routines at once by using `createRoutines`.
 
-#### Examples:
+## Examples:
 
-##### Default routines with `createRoutines`:
+#### Default routines using `createRoutines`:
 ```js
 import { createRoutines } from 'extend-saga-routines';
 
@@ -251,7 +253,7 @@ const { firstRoutine, secondRoutine, thirdRoutine } = routines;
 
 ```
 
-##### Extended routines with `createRoutines`:
+#### Extended routines using `createRoutines`:
 ```
 To create extended routine inside of bunch
 you need to start with `_` underscore
@@ -286,7 +288,7 @@ console.log(routines.secondRoutine._STAGES);
 
 ```
 
-##### Create `custom` or `socket` routine with `createRoutines`:
+#### Create `custom` or `socket` routine using `createRoutines`:
 ```js
 import { createRoutines } from 'extend-saga-routines';
 
@@ -321,9 +323,9 @@ console.log(routines.socketExtended._STAGES);
 
 ```
 
-##### Change payload and meta creators with `createRoutines`:
+#### Change payload and meta creators using `createRoutines`:
 
-pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
+Pretty similar with redux-action [createActions method](https://redux-actions.js.org/api/createaction#createactions)
 
 ```js
 import { createRoutines } from 'extend-saga-routines';
