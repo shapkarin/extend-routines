@@ -44,3 +44,9 @@ note: from this ver you must have at least `redux-saga-routines 3.2.0` installed
 - `createCustomRoutine` 
   - second argument 'defaultRoutines'
   - able to use first argument as 'defaultRoutines' if it's an array
+
+### Version 3.2.5
+Update documentation.
+
+### Version 3.2.6
+Add a couple of sections and links to the documentation.
