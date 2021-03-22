@@ -61,9 +61,9 @@ describe('create a bunch of routines with `createRoutines`', () => {
   const SCHEME_PLUS = {
     default: null,
     multiplyPayloads: {
-      '+TRIGGER': [(payload) => payload * 2],
-      '+REQUEST': [(payload) => payload * 3],
-      '+SUCCESS': [(payload) => payload * 4],
+      '--TRIGGER': [(payload) => payload * 2],
+      '-REQUEST': [(payload) => payload * 3],
+      '-SUCCESS': [(payload) => payload * 4],
       '+FAILURE': [(payload) => payload * 5],
       '+FULFILL': [(payload) => payload * 6]
     },

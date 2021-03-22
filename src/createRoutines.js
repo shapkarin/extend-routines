@@ -45,7 +45,7 @@ export default function createRoutines(scheme, defaultRoutines){
       }
 
       if(inside != null && typeof inside === 'object'){
-        let insideStages = Object.keys(inside).filter(i => i.startsWith('_'))
+        let insideStages = Object.keys(inside).filter(i => i.startsWith('_') ||i.startsWith('+'))
         customStages = insideStages.reduce((acc, cur) => !defaultRoutineStages.includes(cur) ? [...acc, cur.substring(1)] : acc ,[]);
         payloadAndMeta = insideStages.reduce((acc, cur) => 
           [
