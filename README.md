@@ -1,5 +1,10 @@
 # extend-saga-routines
 
+![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
+![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
+![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
+[![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
+
 ## What is a [routine](https://www.npmjs.com/package/redux-saga-routines#what-is-routine)?
 Usually you need to describe the same actions for the request with stages like that: 
 - 'prefix/TRIGGER' – action to run the request
@@ -10,11 +15,6 @@ Usually you need to describe the same actions for the request with stages like t
 
 ## What means extended routine?
 With this package you can create [more than default actions above](#with-that-package-you-can). It's API allovs you to [extend any routine with custom stages](#extend-any-routine), create routine with [more than default stages](#create-routine-that-has-more-that-just-redux-saga-routines-default-stages), create [custom routine](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine-). Also you can create a [socket routine](#socket-routine) with socket specific stages and a [bunch of routines](create-routines).
-
-![npm](https://img.shields.io/npm/v/extend-saga-routines.svg)
-![npm](https://img.shields.io/npm/dm/extend-saga-routines.svg)
-![NPM](https://img.shields.io/npm/l/extend-saga-routines.svg)
-[![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
 ## Install 

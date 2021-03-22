@@ -26,7 +26,7 @@ export default function createRoutines(scheme, defaultRoutines){
 
   function iterate(obj){
     for(let [nameSpace, value] of Object.entries(obj)) {
-      if(nameSpace.startsWith('_')) {
+      if(nameSpace.startsWith('_') || nameSpace.startsWith('+')) {
         continue;
       }
       let payloadAndMeta = [null, null];
