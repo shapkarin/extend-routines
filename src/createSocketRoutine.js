@@ -1,4 +1,4 @@
-import { createRoutineCreator } from 'redux-saga-routines';
+import createRoutineCreator from 'redux-saga-routines/dist/createRoutineCreator';
 
 export const defaultSocketStages = ['CONNECTED', 'DISCONNECTED', 'JOIN_CHANNEL', 'CHANNEL_JOINED', 'LEAVE_CHANNEL', 'CHANNEL_LEAVED'];
 

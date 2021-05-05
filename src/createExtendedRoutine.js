@@ -1,4 +1,5 @@
-import { createRoutineCreator, defaultRoutineStages } from 'redux-saga-routines';
+import createRoutineCreator from 'redux-saga-routines/dist/createRoutineCreator';
+import defaultRoutineStages from 'redux-saga-routines/dist/routineStages';
 
 export default function createExtendedRoutine(typePrefix, stages = [], payloadCreator, metaCreator){
   if(typeof typePrefix !== 'string'){
