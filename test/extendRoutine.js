@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { createRoutine } from 'redux-saga-routines';
+import createRoutine from 'redux-saga-routines/dist/createRoutine';
 
 import extendRoutine from '../src';
 
