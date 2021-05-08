@@ -1,4 +1,4 @@
-import { createRoutineCreator } from 'redux-saga-routines';
+import createRoutineCreator from 'redux-saga-routines/dist/createRoutineCreator';
 
 export default function extendRoutine(routine, stages, payloadCreator, metaCreator){
   if(routine === undefined){

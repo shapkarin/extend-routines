@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { defaultRoutineStages } from 'redux-saga-routines';
+import defaultRoutineStages from 'redux-saga-routines/dist/routineStages';
 
 import { createRoutines, defaultSocketStages } from '../src';
 

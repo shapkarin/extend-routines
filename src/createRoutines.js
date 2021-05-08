@@ -1,4 +1,4 @@
-import { defaultRoutineStages } from 'redux-saga-routines';
+import defaultRoutineStages from 'redux-saga-routines/dist/routineStages';
 import * as routeCreators from './index'; 
 
 
