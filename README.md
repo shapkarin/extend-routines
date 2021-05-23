@@ -19,6 +19,9 @@ With this package you can create [more than default actions above](#with-that-pa
 [![Build Status](https://travis-ci.org/shapkarin/extend-saga-routines.svg?branch=master)](https://travis-ci.org/shapkarin/extend-saga-routines)
 
 [more info about `redux-saga-routines`](https://www.npmjs.com/package/redux-saga-routines)
+
+### If you want to [say thank you](https://github.com/shapkarin/extend-saga-routines/blob/master/thanks.md).
+
 ## Install 
 
 ```
