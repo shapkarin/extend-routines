@@ -1,3 +1,4 @@
+upd: renamed to [extend-routines](https://www.npmjs.com/package/extend-routines)
 # extend-saga-routines
 
 ## What is a [routine](https://www.npmjs.com/package/redux-saga-routines#what-is-routine)?
