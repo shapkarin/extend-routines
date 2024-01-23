@@ -10,6 +10,7 @@ Usually you need to describe the same actions for the request with stages like t
 - 'prefix/FULFILL' – request completed
 
 ## UPDATE: from version 3.3.0 there is no me redux-saga dependency! Feel free to use this lib with any other stack!
+Nice to use with https://redux-toolkit.js.org/
 
 ## What means extended routine?
 With this package you can create [more than default actions above](#with-that-package-you-can). It's API allovs you to [extend any routine with custom stages](#extend-any-routine), create routine with [more than default stages](#create-routine-that-has-more-that-just-redux-saga-routines-default-stages), create [custom routine](#if-you-dont-need-default-routine-stages-you-can-use-createcustomroutine-). Also you can create a [socket routine](#socket-routine) with socket specific stages and a [bunch of routines](create-routines).
